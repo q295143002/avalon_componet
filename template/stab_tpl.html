@@ -1,0 +1,18 @@
+<div ms-css="{width:'400px'}" class="x_tab">
+    <div class="x_tab_head">
+        <ul >
+            <li ms-for="(el,$index) in @data">
+                <a href="javascript:;" ms-click="@tabChange(el)">{{el}}</a>
+            </li>
+        </ul>
+
+    </div>
+    <div class="x_tab_body">
+        <ul >
+            <li ms-for="(el,$index) in @data[@defaultHead]">
+                <a href="javascript:;" ms-click="@setItem($index)">{{$index['city']}}</a>
+            </li>
+        </ul>
+    </div>
+
+</div>

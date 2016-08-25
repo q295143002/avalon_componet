@@ -1,0 +1,15 @@
+*{
+    padding:0;
+    margin:0;
+}
+.x_tab{
+    min-height:200px;
+    background-color: #5cb85c;
+}
+.x_tab_head ul{
+    list-style: none;
+}
+.x_tab_head li{
+    display: inline-block;
+    border:1px solid red;
+}

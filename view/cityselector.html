@@ -5,8 +5,9 @@
     <title>Title</title>
     <script data-main="../main.js" src="../vender/require.js"></script>
     <script>
-        require(['vender/jquery', 'vender/avalon'], function ($, avalon) {
-            console.log($);
+        require(['require','vender/jquery', 'vender/avalon'], function (require, avalon) {
+            var $=require('jquery')
+            console.log(require);
             console.log(avalon);
         })
     </script>
