@@ -13,3 +13,7 @@
     display: inline-block;
     border:1px solid red;
 }
+.x_tab_body li{
+    display: inline-block;
+    padding:3px 4px;
+}

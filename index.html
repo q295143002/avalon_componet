@@ -5,39 +5,35 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Title</title>
     <link rel="stylesheet" href="style/componet.css">
-    <script data-main="main.js" src="vender/require.js"></script>
+    <script src="vender/jquery.js"></script>
+    <script src="vender/avalon.js"></script>
+    <script src="componet/cityData.js"></script>
+    <script src="componet/cityselector.js"></script>
     <script>
-        require(['require','componet/cityselector'], function (require) {
-           var ava=require('avalon')
-            ava.define({
-                $id:'test',
-                a:110,
-                config:{
-                    buttonText:12306,
-                    width:'200px',
-                    data:{
-                        'abcdef':[{city:'大连'},{city:'大连'},{city:'大连'},{city:'大连'},{city:'大连'}],
-                        'ghijklm':[{city:'大连1'},{city:'大连'},{city:'大连'},{city:'大连'}],
-                        'nopqrst':[{city:'大连2'},{city:'大连'},{city:'大连'},{city:'大连'}],
-                        'uvwxyz':[{city:'大连3'},{city:'大连'},{city:'大连'},{city:'大连'}]
-                    }
-                },
-                aaa:function(){
-                    console.log(111)
-                }
-            })
+
+
+        var a = avalon.define({
+            $id: 'test',
+            a: 110,
+            config: {
+                buttonText: 12306,
+                width: '200px'
+
+            },
+            aaa: function (index) {
+            }
         })
 
     </script>
 </head>
 <body ms-controller="test">
-console.log({{@key['city']}}
 
-<xmp :widget="[{is:'ms-grid'},@config,{onReady:@aaa}]">
 
+<xmp :widget="[{is:'ms-grid',$id:'wueieu'},@config,{onReady:@aaa}]">
+    <ms-search></ms-search>
+
+    <ms-stab></ms-stab>
 </xmp>
-<xmp :widget="[{is:'ms-grid'},@config,{onReady:@aaa}]">
 
-</xmp>
 </body>
 </html>

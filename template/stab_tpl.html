@@ -9,8 +9,9 @@
     </div>
     <div class="x_tab_body">
         <ul >
+            {{@defaultHead}}
             <li ms-for="(el,$index) in @data[@defaultHead]">
-                <a href="javascript:;" ms-click="@setItem($index)">{{$index['city']}}</a>
+                <a href="javascript:;" ms-click="@setItem($index)">{{$index['CityName']}}</a>
             </li>
         </ul>
     </div>
