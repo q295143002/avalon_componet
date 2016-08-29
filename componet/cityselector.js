@@ -18,9 +18,7 @@ function heredoc(fn) {
         }),
         soleSlot: 'buttonText',
         defaults: {
-            xBlur:true,           //控制遮罩层
-            xTabShow:false,             //控制tab
-            xSearchShow:false,             //控制tab
+
             buttonText: 'hello',
             eclipice:function(){
                 this.xTabShow=false;
@@ -78,7 +76,7 @@ function heredoc(fn) {
                       method:'get',
                       success:function(data){
                           _self.source=data;
-                          _self.filter(_self.search, _self.source);
+                          _self.filter(_self.key['CityName'], _self.source);
                       },
                       error:function(data){
                           //console.log(data)
@@ -90,10 +88,7 @@ function heredoc(fn) {
             listKey: function () {
                 var e = window.event;
                 var _self=this;
-                if(this.key['CityName']!==''){
-                    this.xSearchShow = true;
-                    this.xTabShow=false;
-                }
+
 
                 if (e.keyCode === 38) {   //向上
                     if(!this.xSearchShow){
@@ -122,12 +117,23 @@ function heredoc(fn) {
 
                 }
                 if (e.keyCode === 39 || e.keyCode === 37|| e.keyCode === 13) {   //向下
-                    this.key['CityName'] = this.showData[this.panel.index];
+                    if(!this.xSearchShow){
+                        return;
+                    }
+                    console.log(111)
+                    this.key['CityName'] = this.showData[this.panel.index]||'';
                     this.xSearchShow = false;
                     this.blur = false;
+
                     return;
 
                 }
+
+                if(this.key['CityName']!==''){
+                    this.xSearchShow = true;
+                    this.xTabShow=false;
+                }
+                console.log(12211)
                 this.panel.index = 0;
                 //console.log(this.isAjax)
                     $.ajax({
@@ -204,6 +210,8 @@ function heredoc(fn) {
                 for(var i in this.key){
                     this.key[i]=obj[i]
                 }
+                this.xTabShow=false;
+                this.blur=false;
             },
             onInit:function(){
 
