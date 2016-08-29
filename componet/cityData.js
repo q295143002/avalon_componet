@@ -2,7 +2,7 @@
  * Created by gxia on 2016/8/26.
  */
 var initData = {
-    'ABCEDF': [{
+    'ABCDEF': [{
         "Airport": "AOG",
         "ChSpelling": "Anshan",
         "CityCode": "AOG",
@@ -42,7 +42,7 @@ var initData = {
         "parentStation": "",
         "parentStationPinyin": "",
         "siteType": "F"
-    },{
+    }, {
         "Airport": "AYN",
         "ChSpelling": "Anyang",
         "CityCode": "AYN",
@@ -102,7 +102,7 @@ var initData = {
         "parentStation": "阿勒泰",
         "parentStationPinyin": "Aletai",
         "siteType": "F"
-    },  {
+    }, {
         "Airport": "AEB",
         "ChSpelling": "Baise",
         "CityCode": "AEB",
@@ -222,7 +222,7 @@ var initData = {
         "parentStation": "",
         "parentStationPinyin": "",
         "siteType": "F"
-    },{
+    }, {
         "Airport": "RLK",
         "ChSpelling": "Bayannaoer",
         "CityCode": "RLK",
@@ -242,7 +242,7 @@ var initData = {
         "parentStation": "巴彦淖尔",
         "parentStationPinyin": "Bayannaoer",
         "siteType": "F"
-    },{
+    }, {
         "Airport": "BJS",
         "ChSpelling": "Beijing",
         "CityCode": "BJS",
@@ -562,7 +562,7 @@ var initData = {
         "parentStation": "长春",
         "parentStationPinyin": "Changchun",
         "siteType": "F"
-    },{
+    }, {
         "Airport": "CSX",
         "ChSpelling": "Changsha",
         "CityCode": "CSX",
@@ -922,7 +922,7 @@ var initData = {
         "parentStation": "大理市",
         "parentStationPinyin": "Dali",
         "siteType": "F"
-    },{
+    }, {
         "Airport": "DSN",
         "ChSpelling": "E'erduosi",
         "CityCode": "DSN",
@@ -1443,7 +1443,7 @@ var initData = {
         "parentStation": "桂林",
         "parentStationPinyin": "Guilin",
         "siteType": "F"
-    },  {
+    }, {
         "Airport": "CAN",
         "ChSpelling": "Guangzhou",
         "CityCode": "CAN",
@@ -1463,7 +1463,7 @@ var initData = {
         "parentStation": "广州",
         "parentStationPinyin": "Guangzhou",
         "siteType": "F"
-    },{
+    }, {
         "Airport": "KOW",
         "ChSpelling": "Ganzhou",
         "CityCode": "KOW",
@@ -1663,7 +1663,7 @@ var initData = {
         "parentStation": "黄石",
         "parentStationPinyin": "Huangshi",
         "siteType": "F"
-    },{
+    }, {
         "Airport": "HRB",
         "ChSpelling": "Haerbin",
         "CityCode": "HRB",
@@ -2264,7 +2264,7 @@ var initData = {
         "parentStationPinyin": "Kuche",
         "siteType": "F"
     }],
-    'LMNOP': [{
+    'LMNP': [{
         "Airport": "LHW",
         "ChSpelling": "Lanzhou",
         "CityCode": "LHW",
@@ -2744,7 +2744,7 @@ var initData = {
         "parentStation": "宁波",
         "parentStationPinyin": "Ningbo",
         "siteType": "F"
-    },  {
+    }, {
         "Airport": "KHN",
         "ChSpelling": "Nanchang",
         "CityCode": "KHN",
@@ -2764,7 +2764,7 @@ var initData = {
         "parentStation": "南昌",
         "parentStationPinyin": "Nanchang",
         "siteType": "F"
-    },{
+    }, {
         "Airport": "NNG",
         "ChSpelling": "Nanning",
         "CityCode": "NNG",
@@ -3105,7 +3105,7 @@ var initData = {
         "parentStation": "青岛",
         "parentStationPinyin": "Qingdao",
         "siteType": "F"
-    },{
+    }, {
         "Airport": "JUZ",
         "ChSpelling": "Quzhou",
         "CityCode": "JUZ",
@@ -3125,7 +3125,7 @@ var initData = {
         "parentStation": "衢州",
         "parentStationPinyin": "Quzhou",
         "siteType": "F"
-    },  {
+    }, {
         "Airport": "JJN",
         "ChSpelling": "Quanzhou",
         "CityCode": "JJN",
@@ -3365,7 +3365,7 @@ var initData = {
         "parentStation": "启东",
         "parentStationPinyin": "Qidong",
         "siteType": "F"
-    } ,{
+    }, {
         "Airport": "-",
         "ChSpelling": "Renhuai",
         "CityCode": "-",
@@ -3425,7 +3425,7 @@ var initData = {
         "parentStation": "日喀则",
         "parentStationPinyin": "Rikaze",
         "siteType": "F"
-    },{
+    }, {
         "Airport": "-",
         "ChSpelling": "Ruichang",
         "CityCode": "-",
@@ -3605,7 +3605,7 @@ var initData = {
         "parentStation": "上海(浦东)",
         "parentStationPinyin": "Shanghai(PU DONG)",
         "siteType": "F"
-    },  {
+    }, {
         "Airport": "SZV",
         "ChSpelling": "Suzhou",
         "CityCode": "SZV",
@@ -4146,7 +4146,7 @@ var initData = {
         "parentStation": "厦门",
         "parentStationPinyin": "Xiamen",
         "siteType": "F"
-    },{
+    }, {
         "Airport": "ACX",
         "ChSpelling": "Xingyi",
         "CityCode": "ACX",
@@ -4186,7 +4186,7 @@ var initData = {
         "parentStation": "西安",
         "parentStationPinyin": "Xian",
         "siteType": "F"
-    },{
+    }, {
         "Airport": "SIA",
         "ChSpelling": "Xian",
         "CityCode": "SIA",
@@ -4366,7 +4366,7 @@ var initData = {
         "parentStation": "湘潭",
         "parentStationPinyin": "Xiangtan",
         "siteType": "F"
-    },  {
+    }, {
         "Airport": "YNT",
         "ChSpelling": "Yantai",
         "CityCode": "YNT",
@@ -4406,7 +4406,7 @@ var initData = {
         "parentStation": "延安",
         "parentStationPinyin": "Yan'an",
         "siteType": "F"
-    },  {
+    }, {
         "Airport": "YNZ",
         "ChSpelling": "Yancheng",
         "CityCode": "YNZ",
@@ -4828,6 +4828,24 @@ var initData = {
         "siteType": "F"
     }]
 }
+
+  function transformInit(){
+      var result = {}
+      for (var i in initData) {
+          if (result[i] === undefined) {
+              result[i] = {};
+              var temp = i.split('');
+              for (var k = 0; k < temp.length; k++) {
+                  result[i][temp[k]] = [];
+              }
+              for (var j = 0; j < initData[i].length; j++) {
+                  result[i][initData[i][j]['StartChar']].push(initData[i][j])
+              }
+          }
+      }
+      return result;
+  }
+    initData = transformInit();
 
 
 /*var F_LISTFOR_FGHJK =

@@ -2,18 +2,145 @@
     padding:0;
     margin:0;
 }
-.x_tab{
+
+.city_wrap{
+    position: relative;
+    margin:0 auto;
+}
+/*city_tab*/
+.city_tab{
+    position: absolute;
+    top:20px;
+    border:1px solid #999;
+    margin-top: -1px;
     min-height:200px;
-    background-color: #5cb85c;
+    background-color: #ffffff;
+    width:400px !important;
+    z-index: 19931002;
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    padding:10px 0px 10px 0px;
+
 }
-.x_tab_head ul{
-    list-style: none;
+.city_tab .x_tab_body{
+    padding-left:10px;
 }
-.x_tab_head li{
-    display: inline-block;
-    border:1px solid red;
-}
-.x_tab_body li{
+.city_tab .x_tab_body li{
     display: inline-block;
     padding:3px 4px;
 }
+.city_tab .x_tab_body>ul>li{
+    width:100%;
+}
+.city_tab .x_tab_body>ul>li>span{
+    width:5%;
+    margin-top: 2px;
+    font-size: 16px;
+    color: #f60;
+    float: left;
+}
+.city_tab .x_tab_body>ul>li>ul{
+    width:90%;
+    float: left;
+}
+.city_tab  .x_tab_body a,.city_tab  .x_tab_head a{
+    color: #000;
+    text-decoration: none;
+    transition: all .3s;
+    display: block;
+
+}
+.city_tab  .x_tab_body a:hover{
+    color: #f60;
+    background-color: #eee;
+    animation-duration:.2s;
+}
+.city_tab  .x_tab_head {
+    border-bottom: 1px solid #999;
+    height:30px;
+
+
+}
+
+
+.city_tab  .x_tab_head ul{
+    list-style: none;
+    position: absolute;
+    width:95%;
+    padding-left: 5%;
+
+}
+.city_tab  .x_tab_head a{
+    padding:3px 6px 8px 6px;
+    border:1px solid transparent;
+
+    margin-left: -1px;
+
+
+
+}
+
+.city_tab  .x_tab_head a:hover{
+    text-decoration: underline;
+    color: #f60;
+
+}
+.city_tab  .x_tab_head li{
+    display: inline-block;
+
+
+
+
+}
+
+.city_tab  .selected{
+    border:1px solid #999 !important;
+    border-bottom:1px solid #fff !important;
+}
+
+
+
+/*city_tab*/
+
+
+
+
+
+.search_panel{
+    background-color: #5cb85c;
+    height: 155px;
+    width: 255px;
+}
+.bg_red{
+    background-color: #ddd;
+    color:#ffffff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.city_search{
+    position: absolute;
+    z-index: 19931002;
+    height:20px;
+}
+
+.x_tab_eclipice{
+    position: fixed;
+    top:0;
+    left: 0;
+    background-color: transparent;
+    height: 1800px;
+    width: 2000px;
+    z-index: 19910925;
+}
+
+

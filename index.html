@@ -14,26 +14,34 @@
 
         var a = avalon.define({
             $id: 'test',
-            a: 110,
+            key: {
+                CityName: '',
+                CityCode: '',
+                ID: ''
+            },
+            ajaxUrl:'1.json',
             config: {
                 buttonText: 12306,
                 width: '200px'
 
             },
-            aaa: function (index) {
+            aaaa: function () {
+                this.b.a = [1, 888, 4]
+                console.log(this.b)
             }
         })
 
     </script>
 </head>
 <body ms-controller="test">
+<div ms-css="{width:@config.width}" class="city_wrap">
 
+    <xmp :widget="[{is:'ms-grid',$id:'wueieu'},@config]" >
+        <ms-search class="city_search"></ms-search>
 
-<xmp :widget="[{is:'ms-grid',$id:'wueieu'},@config,{onReady:@aaa}]">
-    <ms-search></ms-search>
-
-    <ms-stab></ms-stab>
-</xmp>
+        <ms-stab class="city_tab"></ms-stab>
+    </xmp>
+</div>
 
 </body>
 </html>
