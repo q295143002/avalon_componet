@@ -1,5 +1,6 @@
 /**
  * Created by gxia on 2016/8/25.
+ *  <div class="x_tab_eclipice"  ms-click='@eclipice()' ms-if='@xBlur'></div>
  */
 function heredoc(fn) {
     return fn.toString().replace(/^[^\/]+\/\*!?\s?/, '').
@@ -11,41 +12,39 @@ function heredoc(fn) {
         template: heredoc(function(){
            /*
            <div>
-            <div class="x_tab_eclipice"  ms-click='@eclipice()' ms-if='@xBlur'></div>
             <slot ></slot>
            </div>
             */
         }),
         soleSlot: 'buttonText',
         defaults: {
-
+            //xBlur:true,           //控制遮罩层
             buttonText: 'hello',
-            eclipice:function(){
-                this.xTabShow=false;
-                this.xBlur =false;
-                this.xSearchShow =false;
+            stopPro:function(e){
+                e.stopPropagation();
             }
-
+            /*eclipice:function(){
+                this.xTabShow=false;
+                //this.xBlur =false;
+                this.xSearchShow =false;
+            }*/
         }
     })
     avalon.component('ms-search', {
         template:heredoc(function(){
             /*
-             <div>
-               <input type="text"  ms-css="{width:@width}" ms-duplex="@key['CityName']" ms-click="@focusFn()" ms-keyup="@listKey()">
-
+            <div>
+             <div class='search_group'  ms-click='@stopPro($event)'>
+               <input type="text"   ms-duplex="@key['CityName']"  ms-focus="@focusFn($event)" ms-keyup="@listKey($event)">
                  <div ms-if="@xSearchShow" ms-css="{width:@width}" class='search_panel'>
                    <ul class="search_list">
                      <li ms-if="@showData.length ===0" ms-css="{textAlign:'center'}"> 没有搜索结果</li>
                      <li ms-for="($index,el) in @showData" ms-mouseover="@panelMouse($index)"
-                      ms-class="{'bg_red':$index===@panel.index}" ms-click="@setData($index)"
-                     >{{el}}</li>
+                      ms-class="{'bg_red':$index===@panel.index}" ms-click="@setData($event,$index)"
+                     ><span class='dis_left'>{{el['CityName']}}<span class='dis_code'>({{el['CityCode']}})</span></span><span  class='dis_right'>{{el['ChSpelling']}}</span></li>
                    </ul>
+                  </div>
              </div>
-
-             <div>{{@key['CityName']}}</div>
-             <div>{{@key['CityCode']}}</div>
-             <div>{{@key['ID']}}</div>
              </div>
              */
         }),
@@ -56,25 +55,32 @@ function heredoc(fn) {
                 index: 0
 
             },
-            setData: function (index) {
-                this.key['CityName'] = this.showData[index];
+            setData: function (e,index) {
+                console.log(this.ie8_key.length)
+                for(var i= 0 ;i<this.ie8_key.length;i++){
+                    this.key[this.ie8_key[i]] = this.showData[index][this.ie8_key[i]];
+                }
+
                 this.xSearchShow = false;
             },
             panelMouse: function (index) {
                 this.panel.index = index;
             },
-            focusFn:function(){
+            focusFn:function(e){
               if(this.key['CityName']===''){
+                  //this.xBlur =true;
                   this.xTabShow=true;
-                  this.xBlur =true;
+                  this.xSearchShow=false;
+
               } else {
-                  var _self=this;
-                  this.xSearchShow=true;
-                  this.xBlur =true;
-                  $.ajax({
+                  this.xTabShow=true;
+                  //this.xBlur =true;
+
+                  /*$.ajax({
                       url:this.ajaxUrl,
                       method:'get',
                       success:function(data){
+                          _self.showData = [];
                           _self.source=data;
                           _self.filter(_self.key['CityName'], _self.source);
                       },
@@ -82,14 +88,12 @@ function heredoc(fn) {
                           //console.log(data)
                       }
 
-                  })
+                  })*/
               }
             },
-            listKey: function () {
-                var e = window.event;
+            listKey: function (event) {
+                var e = event||window.event;
                 var _self=this;
-
-
                 if (e.keyCode === 38) {   //向上
                     if(!this.xSearchShow){
                         return;
@@ -117,14 +121,16 @@ function heredoc(fn) {
 
                 }
                 if (e.keyCode === 39 || e.keyCode === 37|| e.keyCode === 13) {   //向下
+                    console.log(this.xSearchShow)
                     if(!this.xSearchShow){
                         return;
                     }
-                    console.log(111)
-                    this.key['CityName'] = this.showData[this.panel.index]||'';
+                    this.key['CityName'] = this.showData[this.panel.index]['CityName']||'';
+                    for(var i= 1 ;i<this.ie8_key.length;i++){
+                        this.key[this.ie8_key[i]] = this.showData[this.panel.index][this.ie8_key[i]];
+                    }
                     this.xSearchShow = false;
-                    this.blur = false;
-
+                    //this.xBlur = false;
                     return;
 
                 }
@@ -133,37 +139,54 @@ function heredoc(fn) {
                     this.xSearchShow = true;
                     this.xTabShow=false;
                 }
-                console.log(12211)
+                if (_self.key['CityName'] == '') {
+                    _self.xTabShow=true;
+                    return;
+                }
                 this.panel.index = 0;
-                //console.log(this.isAjax)
+
                     $.ajax({
                         url:this.ajaxUrl,
                         method:'get',
                         success:function(data){
+                            _self.showData = [];
                             _self.source=data;
                             _self.filter(_self.key['CityName'], _self.source);
-                            if (_self.key['CityName'] == '') {
-                                _self.xSearchShow = false;
-                                _self.xTabShow=true;
-                            }
+
                         },
                         error:function(data){
-                            //console.log(data)
+
                         }
 
                     })
             },
+            dealData:function(){
+
+            },
             filter: function (key, array) {
+                if(key===''){
+                    return
+                }
                 this.showData = [];
-                var keyReg = new RegExp(key, 'g')
+                var keyReg = new RegExp(key.toUpperCase(), 'g');
+                var a=b=c=false;
+
                 for (var i = 0; i < array.length; i++) {
                     if (i > 10) {
                         return;
                     }
-                    if (keyReg.test(array[i])) {
+                    a = keyReg.test(array[i]['CityName'].toUpperCase());
+                    b = keyReg.test(array[i]['CityCode'].toUpperCase());
+                    c = keyReg.test(array[i]['parentStationPinyin'].toUpperCase());
+                    console.log(1)
+                    if (a||b||c) {
                         this.showData.push(array[i]);
                     }
+
+
                 }
+
+
 
             }
         }
@@ -172,22 +195,21 @@ function heredoc(fn) {
     avalon.component('ms-stab', {
         template: heredoc(function(){
             /*
-            <div class="x_tab" ms-if='@xTabShow'>
-               <div class="x_tab_head">
+            <div class="x_tab" ms-if='@xTabShow'  >
+               <div class="x_tab_head" ms-click='@stopPro($event)'>
                  <ul >
                     <li ms-for="(el,$index) in @data" >
-                      <a href="javascript:;" ms-click="@tabChange(el)" ms-class="{"selected":el===@defaultHead}">{{el}}</a>
+                      <a href="javascript:;" ms-click="@tabChange($event,el,this)" class='s_tab' ms-class="{"selected":el===@defaultHead}">{{el}}</a>
                     </li>
                  </ul>
-
                </div>
-               <div class="x_tab_body" ms-for="(el,$index) in @data" ms-visible="el===@defaultHead">
+               <div class="x_tab_body" ms-for="(el,$index) in @data" ms-visible="el===@defaultHead" ms-click='@stopPro($event)'>
                  <ul>
                     <li ms-for="(el,$index) in $index">
                         <span >{{el}} </span>
                         <ul >
                             <li ms-for="(el,$index) in $index" >
-                                <a href="javascript:;" ms-click="@setItem($index)">{{$index['CityName']}}</a>
+                                <a href="javascript:;" ms-click="@setItem($event,$index)">{{$index['CityName']}}</a>
 
                             </li>
                         </ul>
@@ -201,17 +223,35 @@ function heredoc(fn) {
         defaults: {
             defaultHead:'ABCDEF',
             data:initData,
-            tabChange:function(ele){
+            tabChange:function(e,ele,self){
+                var index=0;
+                for(var i=0;i<$('.s_tab').length;i++){
+                    if($('.s_tab').eq(i).html()=== e.target.innerHTML){
+                        index=i;
+                        break;
+                    }
+                }
+                $('.s_tab').removeClass('selected');
+                $('.s_tab').eq(i).addClass('selected');
+                $('.x_tab_body').hide();
+                $('.x_tab_body').eq(i).show();      //为了ie8/9 tab切换不正确的问题 用了jquery
 
-                this.defaultHead=ele;
+               // this.defaultHead=ele;
 
             },
-            setItem:function(obj){
+            setItem:function(e,obj){
+               var k=0;
                 for(var i in this.key){
-                    this.key[i]=obj[i]
+                    if(this.ie8_key[k]===undefined){
+                        break;
+                    }
+                    this.key[this.ie8_key[k]]=obj[this.ie8_key[k]]
+                    k++;
                 }
                 this.xTabShow=false;
-                this.blur=false;
+                this.xSearchShow=false;
+
+                //this.xBlur=false;
             },
             onInit:function(){
 

@@ -1,1 +1,27 @@
-[565,58548,915,4548,15848]
+[
+  {
+    "ID": 12690,
+    "ProvinceID": 0,
+    "ProvinceCode": "-",
+    "CityCode": "SJW",
+    "CityName": "石家庄3",
+    "CityID_TongCheng": 0,
+    "IsHot": false,
+    "StartChar": "S",
+    "ChSpelling": "Shijiazhuang",
+    "DistrictID_TongCheng": 0,
+    "siteType": "F",
+    "Airport": "SJW",
+    "parentStation": "石家庄",
+    "parentStationPinyin": "Shijiazhuang",
+    "orderBy": 0,
+    "CityID_HaoBai": null,
+    "CityID_eLong": null,
+    "IsHotelHot": false,
+    "CityCode_MG": false,
+    "CityZoneCode": false,
+    "CityID_JL": false,
+    "CityID_zYou": false,
+    "CityID_LTJL": false
+  }
+]

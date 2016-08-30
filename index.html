@@ -10,34 +10,63 @@
     <script src="componet/cityData.js"></script>
     <script src="componet/cityselector.js"></script>
     <script>
-
-
-        var a = avalon.define({
-            $id: 'test',
-            xBlur:true,           //控制遮罩层
+        var cityPdata={
             xTabShow:false,             //控制tab
             xSearchShow:false,             //控制tab
-            key: {
+            key: {                         //tab key
                 CityName: '',
                 CityCode: '',
                 ID: ''
             },
+            ie8_key:['CityName','CityCode','ID'], //针对IE8下for in的问题
             ajaxUrl:'1.json',
             config: {
-                buttonText: 12306,
-                width: '200px'
-
-            },
-            aaaa: function () {
-                this.b.a = [1, 888, 4]
-                console.log(this.b)
+                width: '350px'
             }
+        }
+        var cityPdataA={};
+        var cityPdataB={};
+        $.extend(cityPdataA,cityPdata,{ $id: 'test'})
+        $.extend(cityPdataB,cityPdata,{ $id: 'test1'})
+        var a = avalon.define(cityPdataA)
+        var bb = avalon.define(cityPdataB)
+
+        var win=avalon.define({
+            $id:'window',
+            holdOut:function(){
+                a.xTabShow=a.xSearchShow=bb.xTabShow=bb.xSearchShow=false;
+            },
+            aa:15
+
+        })
+
+
+
+
+
+        a.$watch('key.CityName',function(){
+            a.key.CityCode='';
+            a.key.ID='';
+        })
+        bb.$watch('key.CityName',function(){
+            a.key.CityCode='';
+            a.key.ID='';
         })
 
     </script>
 </head>
-<body ms-controller="test">
-<div ms-css="{width:@config.width}" class="city_wrap">
+<body ms-controller="window" ms-click="@holdOut()">
+
+{{@aa}}
+<div ms-css="{width:@config.width}" class="city_wrap" ms-controller="test">
+
+    <xmp :widget="[{is:'ms-grid',$id:'wueieu1'},@config]">
+        <ms-search class="city_search"></ms-search>
+
+        <ms-stab class="city_tab"></ms-stab>
+    </xmp>
+</div>
+<div ms-css="{width:@config.width}" class="city_wrap1" ms-controller="test1">
 
     <xmp :widget="[{is:'ms-grid',$id:'wueieu'},@config]" >
         <ms-search class="city_search"></ms-search>
@@ -45,6 +74,5 @@
         <ms-stab class="city_tab"></ms-stab>
     </xmp>
 </div>
-
 </body>
 </html>
