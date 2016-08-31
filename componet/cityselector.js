@@ -1,6 +1,6 @@
 /**
  * Created by gxia on 2016/8/25.
- *  <div class="x_tab_eclipice"  ms-click='@eclipice()' ms-if='@xBlur'></div>
+ * 由于封装成componet组件后，业务需要的key值不好获取 所以采用给每个vm下创建一个componet 的方式获取key
  */
 function heredoc(fn) {
     return fn.toString().replace(/^[^\/]+\/\*!?\s?/, '').
@@ -8,7 +8,7 @@ function heredoc(fn) {
 }
 
 
-    avalon.component('ms-grid', {
+    avalon.component('ms-citypicker', {          //最外层componet
         template: heredoc(function(){
            /*
            <div>
@@ -18,9 +18,9 @@ function heredoc(fn) {
         }),
         soleSlot: 'buttonText',
         defaults: {
-            //xBlur:true,           //控制遮罩层
+            //xBlur:true,               //控制遮罩层
             buttonText: 'hello',
-            stopPro:function(e){
+            stopPro:function(e){        //阻止事件传递
                 e.stopPropagation();
             }
             /*eclipice:function(){
@@ -30,18 +30,20 @@ function heredoc(fn) {
             }*/
         }
     })
-    avalon.component('ms-search', {
+    avalon.component('ms-search', {                  //search 组件
         template:heredoc(function(){
             /*
             <div>
-             <div class='search_group'  ms-click='@stopPro($event)'>
-               <input type="text"   ms-duplex="@key['CityName']"  ms-focus="@focusFn($event)" ms-keyup="@listKey($event)">
-                 <div ms-if="@xSearchShow" ms-css="{width:@width}" class='search_panel'>
+             <div class='search_group'  >
+               <input type="text"  ms-click='@stopPro($event)'  ms-duplex="@key['CityName']"  ms-focus="@focusFn($event)" ms-keyup="@listKey($event)">
+
+                 <div ms-visible="@xSearchShow" ms-css="{width:@width}" class='search_panel' ms-click='@stopPro($event)'>
+
                    <ul class="search_list">
-                     <li ms-if="@showData.length ===0" ms-css="{textAlign:'center'}"> 没有搜索结果</li>
+                     <li ms-visible="@showData.length ===0" ms-css="{textAlign:'center'}"> 没有搜索结果</li>
                      <li ms-for="($index,el) in @showData" ms-mouseover="@panelMouse($index)"
                       ms-class="{'bg_red':$index===@panel.index}" ms-click="@setData($event,$index)"
-                     ><span class='dis_left'>{{el['CityName']}}<span class='dis_code'>({{el['CityCode']}})</span></span><span  class='dis_right'>{{el['ChSpelling']}}</span></li>
+                     ><span class='dis_left'>{{el['CityName']}}<span class='dis_code'>({{el['CityCode']}})</span></span><span  class='dis_right'>{{el['parentStationPinyin']}}</span></li>
                    </ul>
                   </div>
              </div>
@@ -50,12 +52,11 @@ function heredoc(fn) {
         }),
         defaults: {
             showData:[],
-            source:[],
             panel: {
                 index: 0
 
             },
-            setData: function (e,index) {
+            setData: function (e,index) {                   //点击搜索列表，给input赋值
                 console.log(this.ie8_key.length)
                 for(var i= 0 ;i<this.ie8_key.length;i++){
                     this.key[this.ie8_key[i]] = this.showData[index][this.ie8_key[i]];
@@ -63,14 +64,18 @@ function heredoc(fn) {
 
                 this.xSearchShow = false;
             },
-            panelMouse: function (index) {
+            panelMouse: function (index) {                 //搜索列表鼠标移动效果
                 this.panel.index = index;
             },
-            focusFn:function(e){
+            focusFn:function(e){                          //鼠标点击动作
               if(this.key['CityName']===''){
                   //this.xBlur =true;
-                  this.xTabShow=true;
-                  this.xSearchShow=false;
+                  var _self=this;
+                  setTimeout(function(){
+                      //console.log(11)
+                      _self.xTabShow=true;
+                      _self.xSearchShow=false;
+                  },200)
 
               } else {
                   this.xTabShow=true;
@@ -91,7 +96,7 @@ function heredoc(fn) {
                   })*/
               }
             },
-            listKey: function (event) {
+            listKey: function (event) {                //键盘输入动作
                 var e = event||window.event;
                 var _self=this;
                 if (e.keyCode === 38) {   //向上
@@ -134,24 +139,23 @@ function heredoc(fn) {
                     return;
 
                 }
-
                 if(this.key['CityName']!==''){
-                    this.xSearchShow = true;
+
                     this.xTabShow=false;
+                    this.xSearchShow = true;
                 }
                 if (_self.key['CityName'] == '') {
                     _self.xTabShow=true;
                     return;
                 }
                 this.panel.index = 0;
-
                     $.ajax({
                         url:this.ajaxUrl,
-                        method:'get',
+                        method:this.method,
+                        data:JSON.parse(this.ajaxData),
                         success:function(data){
                             _self.showData = [];
-                            _self.source=data;
-                            _self.filter(_self.key['CityName'], _self.source);
+                            _self.filter(_self.key['CityName'], data.Data);
 
                         },
                         error:function(data){
@@ -163,11 +167,13 @@ function heredoc(fn) {
             dealData:function(){
 
             },
-            filter: function (key, array) {
+            filter: function (key, array) {           //key 过滤
                 if(key===''){
                     return
                 }
+                //var tempdata=[];
                 this.showData = [];
+                console.log( this.showData)
                 var keyReg = new RegExp(key.toUpperCase(), 'g');
                 var a=b=c=false;
 
@@ -178,13 +184,12 @@ function heredoc(fn) {
                     a = keyReg.test(array[i]['CityName'].toUpperCase());
                     b = keyReg.test(array[i]['CityCode'].toUpperCase());
                     c = keyReg.test(array[i]['parentStationPinyin'].toUpperCase());
-                    console.log(1)
                     if (a||b||c) {
                         this.showData.push(array[i]);
                     }
-
-
                 }
+
+
 
 
 
@@ -192,7 +197,7 @@ function heredoc(fn) {
         }
     })
 
-    avalon.component('ms-stab', {
+    avalon.component('ms-stab', {                  //cityPicker
         template: heredoc(function(){
             /*
             <div class="x_tab" ms-if='@xTabShow'  >
@@ -223,7 +228,7 @@ function heredoc(fn) {
         defaults: {
             defaultHead:'ABCDEF',
             data:initData,
-            tabChange:function(e,ele,self){
+            tabChange:function(e,ele,self){                     //tab head切换
                 var index=0;
                 for(var i=0;i<$('.s_tab').length;i++){
                     if($('.s_tab').eq(i).html()=== e.target.innerHTML){
@@ -239,7 +244,7 @@ function heredoc(fn) {
                // this.defaultHead=ele;
 
             },
-            setItem:function(e,obj){
+            setItem:function(e,obj){                              //city item select
                var k=0;
                 for(var i in this.key){
                     if(this.ie8_key[k]===undefined){

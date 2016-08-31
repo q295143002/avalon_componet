@@ -11,15 +11,17 @@
     <script src="componet/cityselector.js"></script>
     <script>
         var cityPdata={
-            xTabShow:false,             //控制tab
-            xSearchShow:false,             //控制tab
-            key: {                         //tab key
+            xTabShow:false,                 //控制tab
+            xSearchShow:false,              //控制listsearch
+            ajaxUrl:'1.json',               //搜索数据URL
+            method:'post',                  //ajax方式
+            ajaxData:JSON.stringify({}),    //avalon会转化对象，ie8-不支持this对象 需要用JSON转化
+            key: {                          //最终业务需要得到的key
                 CityName: '',
                 CityCode: '',
                 ID: ''
             },
-            ie8_key:['CityName','CityCode','ID'], //针对IE8下for in的问题
-            ajaxUrl:'1.json',
+            ie8_key:['CityName','CityCode','ID'], //针对IE8下for in key中出现的问题
             config: {
                 width: '350px'
             }
@@ -34,6 +36,7 @@
         var win=avalon.define({
             $id:'window',
             holdOut:function(){
+
                 a.xTabShow=a.xSearchShow=bb.xTabShow=bb.xSearchShow=false;
             },
             aa:15
@@ -44,14 +47,6 @@
 
 
 
-        a.$watch('key.CityName',function(){
-            a.key.CityCode='';
-            a.key.ID='';
-        })
-        bb.$watch('key.CityName',function(){
-            a.key.CityCode='';
-            a.key.ID='';
-        })
 
     </script>
 </head>
@@ -60,7 +55,7 @@
 {{@aa}}
 <div ms-css="{width:@config.width}" class="city_wrap" ms-controller="test">
 
-    <xmp :widget="[{is:'ms-grid',$id:'wueieu1'},@config]">
+    <xmp :widget="[{is:'ms-citypicker',$id:'wueieu1'},@config]">
         <ms-search class="city_search"></ms-search>
 
         <ms-stab class="city_tab"></ms-stab>
@@ -68,7 +63,7 @@
 </div>
 <div ms-css="{width:@config.width}" class="city_wrap1" ms-controller="test1">
 
-    <xmp :widget="[{is:'ms-grid',$id:'wueieu'},@config]" >
+    <xmp :widget="[{is:'ms-citypicker',$id:'wueieu'},@config]" >
         <ms-search class="city_search"></ms-search>
 
         <ms-stab class="city_tab"></ms-stab>
