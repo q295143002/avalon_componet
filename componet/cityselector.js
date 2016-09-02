@@ -18,6 +18,13 @@ avalon.component('ms-citypicker', {          //最外层componet
     }),
     soleSlot: 'buttonText',
     defaults: {
+        key: {                          //最终业务需要得到的key
+            CityName: '',
+            CityCode: '',
+            ID: ''
+        },
+        xTabShow: false,                 //控制tab
+        xSearchShow: false,              //控制listsearch
         //xBlur:true,               //控制遮罩层
         buttonText: 'hello',
         stopPro: function (e) {        //阻止事件传递
@@ -35,7 +42,7 @@ avalon.component('ms-search', {                  //search 组件
         /*
          <div>
          <div class='search_group'  >
-         <input type="text"   ms-duplex="@key['CityName']"  ms-focus="@focusFn($event)" ms-keyup="@listKey($event)">
+         <input type="text"   ms-duplex="@key['CityName']"  ms-click="@focusFn($event)" ms-keyup="@listKey($event)">
 
          <div ms-visible="@xSearchShow" ms-css="{width:@width}" class='search_panel' ms-click='@stopPro($event)'>
 
@@ -198,7 +205,7 @@ avalon.component('ms-search', {                  //search 组件
 avalon.component('ms-stab', {                  //cityPicker
     template: heredoc(function () {
         /*
-         <div class="x_tab" ms-if='@xTabShow'  >
+         <div class="x_tab " ms-if='@xTabShow'  >
          <div class="x_tab_head" ms-click='@stopPro($event)'>
          <ul >
          <li ms-for="(el,$index) in @data" >
