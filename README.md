@@ -1,7 +1,7 @@
 # avalon_componet
 avalon_componet
 
-###the usage od citySelector
+###the usage of `citySelector`
 #####Create the configuration in VM,such as:
 ```javascript
   var vm={$id:'test'};
