@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    </head>
+    <body >
+       <script src='//cdn.bootcss.com/avalon.js/2.1.3/avalon.js'></script>
+
+        <script>
+            avalon.component('ms-button', {
+                template: '<button type="button"><span><slot name="buttonText"/></span></button>',
+                defaults: {
+                    buttonText: "button"
+                }
+            });
+            avalon.define({
+                $id: 'test'
+            })
+        </script>
+        <div ms-controller="test">
+            <xmp ms-widget="{is:'ms-button'}"><i slot="buttonText">ddd</i></xmp>
+            <ms-button><span slot="buttonText">ddd</span></ms-button>  
+        </div>
+    </body>
+</html>
