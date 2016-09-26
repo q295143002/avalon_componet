@@ -1257,7 +1257,9 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 12 */
 /***/ function(module, exports) {
 
-	
+	function filters(array){
+		console.log(array, search)
+	}
 	function orderBy(array, criteria, reverse) {
 	    var type = avalon.type(array)
 	    if (type !== 'array' && type !== 'object')
