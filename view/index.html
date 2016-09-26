@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Title</title>
+    <link rel="stylesheet" href="../style/componet.css">
+    <link rel="stylesheet" href="../style/animate.css">
+    <script src="../vender/jquery.js"></script>
+    <script src="../vender/avalon.js"></script>
+    <script src="../componet/cityData.js"></script>
+    <script src="../componet/cityselector.js"></script>
+    <script>
+        var cityPdata={
+            xTabShow:false,                 //控制tab
+            xSearchShow:false,              //控制listsearch
+            ajaxUrl:'1.json',               //搜索数据URL
+            method:'post',                  //ajax方式
+            ajaxData:JSON.stringify({}),    //avalon会转化对象，ie8-不支持this对象 需要用JSON转化
+            key: {                          //最终业务需要得到的key
+                CityName: '',
+                CityCode: '',
+                ID: ''
+            },
+            ie8_key:['CityName','CityCode','ID'], //针对IE8下for in key中出现的问题
+            config: {
+                width: '350px'
+            }
+        }
+        var cityPdataA={};
+        var cityPdataB={};
+        $.extend(cityPdataA,cityPdata,{ $id: 'test'})
+        $.extend(cityPdataB,cityPdata,{ $id: 'test1'})
+        var a = avalon.define(cityPdataA)
+        var bb = avalon.define(cityPdataB)
+
+        var win=avalon.define({
+            $id:'window',
+            holdOut:function(){
+                a.xTabShow=a.xSearchShow=bb.xTabShow=bb.xSearchShow=false;
+            },
+            aa:15
+
+        })
+
+
+
+
+
+
+    </script>
+</head>
+<body ms-controller="window" ms-click="@holdOut()">
+
+{{@aa}}
+<div ms-css="{width:@config.width}" class="city_wrap" ms-controller="test">
+
+    <xmp :widget="[{is:'ms-citypicker',$id:'wueieu1'},@config]">
+        <ms-search class="city_search"></ms-search>
+
+        <ms-stab class="city_tab animated rotateIn"></ms-stab>
+    </xmp>
+</div>
+<div ms-css="{width:@config.width}" class="city_wrap1" ms-controller="test1">
+
+    <xmp :widget="[{is:'ms-citypicker',$id:'wueieu'},@config]" >
+        <ms-search class="city_search"></ms-search>
+
+        <ms-stab class="city_tab"></ms-stab>
+    </xmp>
+</div>
+</body>
+</html>

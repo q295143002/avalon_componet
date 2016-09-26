@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Title</title>
+    <link rel="stylesheet" href="../style/componet.css">
+    <link rel="stylesheet" href="../style/animate.css">
+    <script src="../vender/jquery.js"></script>
+    <script src="../vender/avalon.js"></script>
+    <script src="../componet/cityData.js"></script>
+    <script src="../componet/cityselector.js"></script>
+    <script>
+        var cityPdata = {
+
+            ajaxUrl: '../1.json',               //搜索数据URL
+            method: 'post',                  //ajax方式
+            ajaxData: JSON.stringify({}),    //avalon会转化对象，ie8-不支持this对象 需要用JSON转化
+            ie8_key: ['CityName', 'CityCode', 'ID'], //针对IE8下for in key中出现的问题
+            config: {
+                width: '350px',
+                key: {                          //最终业务需要得到的key
+                    CityName: '111',
+                    CityCode: '',
+                    ID: ''
+                },
+                xTabShow: false,                 //控制tab
+                xSearchShow: false,              //控制listsearch
+            },
+            config1: {
+                width: '350px',
+                key: {                          //最终业务需要得到的key
+                    CityName: '1211',
+                    CityCode: '',
+                    ID: ''
+                },
+                xTabShow: false,                 //控制tab
+                xSearchShow: false,              //控制listsearch
+            }
+        }
+        var cityPdataA = {};
+        $.extend(cityPdataA, cityPdata, {$id: 'test'})
+        var a = avalon.define(cityPdataA)
+
+
+        var win = avalon.define({
+            $id: 'window',
+            holdOut: function () {
+
+                a.config1.xTabShow = a.config1.xSearchShow=a.config.xTabShow = a.config.xSearchShow = false;
+            },
+            aa: 15
+
+        })
+
+
+    </script>
+</head>
+<body ms-controller="window" ms-click="@holdOut()">
+
+{{@aa}}
+
+<div ms-controller="test">
+    <div ms-css="{width:@config.width}" class="city_wrap">
+
+        <xmp :widget="[{is:'ms-citypicker',$id:'wueieu1'},@config]">
+            <ms-search class="city_search"></ms-search>
+
+            <ms-stab class="city_tab animated rotateIn"></ms-stab>
+        </xmp>
+    </div>
+    <div ms-css="{width:@config.width}" class="city_wrap1">
+
+        <xmp :widget="[{is:'ms-citypicker',$id:'wueieu'},@config1]">
+            <ms-search class="city_search"></ms-search>
+
+            <ms-stab class="city_tab"></ms-stab>
+        </xmp>
+    </div>
+</div>
+</body>
+</html>
