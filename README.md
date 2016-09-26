@@ -30,3 +30,6 @@ avalon_componet
 `tips:the HTMLfragment must belong to the VM which define the 'config'`<br>
 `You can get the data like this:vm.config.config.key.CityName`<br>
  You can define several of the 'config' model,but do `not use the same nmae`'
+ 
+ ###the usage of `search_Module`
+##### `file_path:./view/search_module.html`
