@@ -5,27 +5,29 @@
 body{
     height:1550px;
 }
+/*city_selector*/
 .city_xmp{
     position: relative;
 }
-
 .city_wrap{
     position: relative;
     margin:0 auto;
+    display: inline-block;
+    height: 17px;
 }
 /*city_tab*/
 .city_tab {
     position: absolute;
-    border:1px solid #999;
-    top:27px;
+    border:1px solid #ccc;
+    top:24px;
     margin-top: -1px;
     min-height:200px;
     background-color: #ffffff;
     width:400px !important;
-    z-index: 19931002;
     font-family: Microsoft YaHei;
     font-size: 14px;
     padding:10px 0px 10px 0px;
+    z-index: 111;
 
 }
 .city_tab .x_tab_body{
@@ -67,8 +69,6 @@ body{
 
 
 }
-
-
 .city_tab  .x_tab_head ul{
     list-style: none;
     position: absolute;
@@ -84,7 +84,6 @@ body{
     margin-left: -1px;
     height:20px;
 }
-
 .city_tab  .x_tab_head a:hover{
     text-decoration: underline;
     color: #f60;
@@ -95,21 +94,13 @@ body{
 
 
 }
-
 .city_tab  .selected{
 
     border:1px solid #999 !important;
     border-bottom:2px solid #fff !important;
 }
-
-
-
 /*city_tab*/
-
-
-
-
-
+/*city_select*/
 .search_panel{
     width: 255px;
 }
@@ -138,9 +129,10 @@ body{
 .search_group>input{
     outline:none;
     padding-left: 5px;
-    border:1px solid #eee;
-    height:25px;
-    line-height: 25px;
+    border:#ccc 1px solid;
+    height:22px;
+    line-height: 22px;
+    width:115px;
 }
 .search_group>div{
     border:1px solid #eee;
@@ -163,32 +155,118 @@ body{
 .search_group .dis_code{
     color: #666 !important;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 .city_search{
     position: absolute;
-    z-index: 19931002;
+    z-index: 2;
 
 }
+/*city_select*/
+/*city_selector*/
 
-.x_tab_eclipice{
-    position: fixed;
-    top:0;
-    left: 0;
-    background-color: #ff0;
-    height: 1800px;
-    width: 2000px;
-    z-index: 19910925;
+
+/*date_picker*/
+.date_outer >.date_inner>.date_head>ul,.date_outer >.date_inner>.date_body>ul{
+    width:700px;
+}
+.date_outer >.date_inner>.date_head>ul>li,.date_outer >.date_inner>.date_body>ul>li{
+    display: inline-block;
+    width:98px;
+    border:1px solid red;
 }
 
+
+
+/*
+hoverS*/
+
+.ms_down>div{
+    position: relative;
+
+}
+.ms_hoverS{
+    width:auto;
+    float: left;
+    padding:5px 0 8px 0;
+    border:1px solid transparent;
+    background-color: #fff;
+    margin-left: 5px;
+    margin-right: 10px;
+}
+.ms_hoverS>h4{
+    padding-left:10px;
+    cursor: pointer;
+
+}
+.ms_hoverS .plane-icon{
+    margin-left:10px;
+    margin-right:10px;
+}
+.ms_hoverS .ms_ul_wrap{
+    position: absolute;
+    height:100px;
+    top:35px;
+    z-index:1;
+}
+.ms_hoverS ul{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #fff;
+    box-shadow: 1px 1px 7px #666;
+    cursor: pointer;
+    background-color: #fff;
+
+}
+.ms_hoverS ul>li{
+    width:140px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    height:20px;
+    line-height: 20px;
+    display: inline-block;
+    padding:8px 8px 3px 10px;
+
+}
+.ms_hoverS ul>li:hover{
+    background-color: #74A2DE;
+}
+.ms_hoverS ul>li span{
+    margin-left: 10px;
+    cursor: pointer;
+}
+{
+    display: inline-block;
+}
+
+.ms_showS .ms_close{
+    cursor: pointer;
+}
+.ms_showS li,.ms_showS{
+    display: inline-block;
+}
+.ms_showS ul,.ms_hoverS ul{
+    list-style: none;
+}
+.ms_showS li{
+    margin:5px 6px 6px 5px;
+    padding:2px 5px 3px 5px;
+    background-color: #74A2DE;
+    border-radius: 2px;
+}
+.ms_showS li span{
+    display: inline-block;
+    margin-left: 10px;
+}
+.ms_border{
+    border:1px solid #ccc;
+    box-shadow: 1px 1px 7px #666;
+}
+.ms_eli{
+    width: 100%;
+    height: 10px;
+    background-color: #fff;
+    position: absolute;
+    top: 25px;
+    z-index: 15;
+}
 

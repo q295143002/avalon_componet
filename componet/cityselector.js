@@ -1,12 +1,14 @@
 /**
  * Created by gxia on 2016/8/25.
- * 由于封装成componet组件后，业务需要的key值不好获取 所以采用给每个vm下创建一个componet 的方式获取key
+ *
  */
 function heredoc(fn) {
     return fn.toString().replace(/^[^\/]+\/\*!?\s?/, '').
     replace(/\*\/[^\/]+$/, '').trim().replace(/>\s*</g, '><')
 }
-
+avalon.filters.Fwords=function(val){
+    return val.replace(/(\().*?(\))/g,'');
+}
 
 avalon.component('ms-citypicker', {          //最外层componet
     template: heredoc(function () {
@@ -42,7 +44,7 @@ avalon.component('ms-search', {                  //search 组件
         /*
          <div>
          <div class='search_group'  >
-         <input type="text"   ms-duplex="@key['CityName']"  ms-click="@focusFn($event)" ms-keyup="@listKey($event)">
+         <input type="text"   ms-duplex="@key['CityName']" ms-attr="{'tabindex':@tabIndex,'id':@id}"  ms-focus="@focusFn($event)"  ms-keyup="@listKey($event)">
 
          <div ms-visible="@xSearchShow" ms-css="{width:@width}" class='search_panel' ms-click='@stopPro($event)'>
 
@@ -75,6 +77,7 @@ avalon.component('ms-search', {                  //search 组件
             this.panel.index = index;
         },
         focusFn: function (e) {
+            win.holdOut()
             var _self = this;
             setTimeout(function () {
                 //console.log(11)
@@ -219,7 +222,7 @@ avalon.component('ms-stab', {                  //cityPicker
          <span >{{el}} </span>
          <ul >
          <li ms-for="(el,$index) in $index" >
-         <a href="javascript:;" ms-click="@setItem($event,$index)">{{$index['CityName']}}</a>
+         <a href="javascript:;" ms-click="@setItem($event,$index)">{{$index['CityName']|Fwords}}</a>
 
          </li>
          </ul>
