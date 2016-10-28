@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../style/animate.css">
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        .ani{
+           transition: all 10s ease-in;
+           transform: translate(0,-500px);
+        }
+   .stage{
+       perspective: 2000px;
+   }
+        .wrap{
+            position: relative;
+            overflow: hidden;
+            height: 210px;
+
+            transform-style: preserve-3d;
+        }
+        .list {
+            float: left;
+            list-style: none;
+            overflow: hidden;
+            margin-left: 50px;
+        }
+        .elps{
+            z-index: 50;
+            list-style: none;
+            opacity: 1;
+            position: absolute;
+            height: 210px;
+            width: 300px;
+
+        }
+        .list>li,.elps>li{
+            height:30px;
+            line-height: 30px;
+            font-size: 20px;
+        }
+        .elps>li:nth-child(1){
+            background-image: linear-gradient(rgba(45,45,45,.8),rgba(115,115,115,.7));
+        }
+        .elps>li:nth-child(2){
+            background-image: linear-gradient(rgba(115,115,115,.7),rgba(185,185,185,.6));
+        }
+        .elps>li:nth-child(3){
+            background-image: linear-gradient(rgba(185,185,185,.6),rgba(244,244,244,.5));
+        }
+        .elps>li:nth-child(4){
+            background-image: linear-gradient(rgba(244,244,244,.5),rgba(255,255,255,.4),rgba(244,244,244,.5));
+        }
+        .elps>li:nth-child(5){
+            background-image: linear-gradient(rgba(244,244,244,.5),rgba(185,185,185,.6));
+        }
+        .elps>li:nth-child(6){
+            background-image: linear-gradient(rgba(185,185,185,.6),rgba(115,115,115,.7));
+        }
+        .elps>li:nth-child(7){
+            background-image: linear-gradient(rgba(115,115,115,.7),rgba(45,45,45,.8));
+        }
+       .list>li:nth-child(7){
+           transform: rotateX(45deg) translateZ(-8px);
+           transform-origin: 29% 30%;
+       }
+        .list>li:nth-child(6){
+            transform-origin:20% 20%;
+            transform:rotateX(30deg)  translateZ(-5px);
+        }
+        .list>li:nth-child(5){
+            transform-origin:20% 10%;
+            transform:rotateX(15deg)  translateZ(-2px);
+        }
+        .list>li:nth-child(1){
+            transform: rotateX(45deg) translateZ(-8px);
+            transform-origin: 29% 30%;
+        }
+        .list>li:nth-child(2){
+            transform-origin:20% 20%;
+            transform:rotateX(30deg)  translateZ(-5px);
+        }
+        .list>li:nth-child(3){
+            transform-origin:20% 10%;
+            transform:rotateX(15deg)  translateZ(-2px);
+        }
+    </style>
+    <script src="../vender/jquery.js"></script>
+    <script src="../vender/avalon.js"></script>
+    <script src="../componet/birthpicker.js"></script>
+    <script>
+        var CONSTDATA = {
+            years: [1930, 2016],
+            mouth: [1, 12],
+            day: [1, 30],
+        }
+        var win = avalon.define({
+            $id: 'win',
+            config: {
+                data: CONSTDATA,
+                show: {
+                    s1: false
+                }
+            },
+            methods: {
+                focus: function () {
+                    win.config.show.s1 = true;
+                }
+            }
+
+
+        })
+
+        win.$watch('onReady', function () {
+            var data = CONSTDATA;
+            for (var i in data) {
+                var temp = data[i];
+                if (data.hasOwnProperty(i)) {
+                    data[i] = range(temp[0], temp[1])
+                }
+            }
+            win.config.data = data;
+
+        })
+
+        function range(a, b) {
+            var temp = [];
+            for (var i = a; i <= b; i++) {
+                temp.push(i)
+            }
+            return temp;
+        }
+    </script>
+</head>
+<body ms-controller="win">
+<div>
+    <input type="text" ms-focus="@methods.focus">
+</div>
+
+<xmp :widget="[{is:'ms-birthpicker',$id:'wueieu1'},@config]">
+
+</xmp>
+
+</body>
+</html>
